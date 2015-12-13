@@ -12,19 +12,22 @@ days_portuguese = c("qui","sex","sáb")
 data = data[data$DateWeekday %in% days_portuguese,]
 
 
-# png("fig2.png", width = 480, height = 480)
+png("fig4.png", width = 480, height = 480,bg="transparent")
+
 par(mfrow= c(2,2))
 
 # 1
-with(data, plot(y =  Global_active_power, 1:nrow(data),type="l",ylab = "Global Active Power (kilowatts)", xlab = "", xaxt="n"))
+with(data, plot(y =  Global_active_power, 1:nrow(data),type="l",ylab = "Global Active Power", xlab = "", xaxt="n"))
 days_english = c("Thu","Fri","Sat")
 index_friday = which(as.character(data$Time)=="00:00:00")[2]
 axis(1, c(1,index_friday,nrow(data)),days_english)
 
 # 2
-with(data, plot(y =  Voltage, 1:nrow(data),type="l",ylab = "Voltage", xlab = "", xaxt="n"))
+plot(y =  data$Voltage, 1:nrow(data),type="l",ylab = "Voltage", xlab = "datetime", yaxt = "n", xaxt="n")
 index_friday = which(as.character(data$Time)=="00:00:00")[2]
 axis(1, c(1,index_friday,nrow(data)),days_english)
+axis(2, seq(900,2100,by=200), c(234,"",238,"",242,"",246))
+
 
 # 3
 data$Sub_metering_1 = as.numeric(as.character(data$Sub_metering_1))
@@ -37,12 +40,16 @@ with(data,  lines(col ="blue",y =  data$Sub_metering_3, 1:nrow(data)  ))
 
 index_friday = which(as.character(data$Time)=="00:00:00")[2]
 axis(1, c(1,index_friday,nrow(data)),days_english)
-legend("topright", lty = 1,  col = c("black","red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3") )
+legend("topright", lty = 1, bty="n", col = c("black","red", "blue"), legend = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3") )
+
+#4
+with(data, plot(y =  Global_reactive_power, 1:nrow(data),type="l", xlab = "datetime" , xaxt="n" , yaxt="n"))
+days_english = c("Thu","Fri","Sat")
+index_friday = which(as.character(data$Time)=="00:00:00")[2]
+axis(1, c(1,index_friday,nrow(data)),days_english)
+axis(2, seq(0,225,by=45), paste(seq(0,0.5,by=0.1),"",sep=""))
 
 dev.off()
 
 
 
-
-
-# dev.off()

@@ -9,7 +9,7 @@ data$Sub_metering_1 = as.numeric(as.character(data$Sub_metering_1))
 data$Sub_metering_2 = as.numeric(as.character(data$Sub_metering_2))
 data$Sub_metering_3 = as.numeric(as.character(data$Sub_metering_3))
 
-png("fig3.png", width = 480, height = 480)
+png("fig3.png", width = 480, height = 480,bg="transparent")
 
 with(data, plot(y =  Sub_metering_1, 1:nrow(data),type="l",ylab = "Energy sub metering", xlab = "", xaxt="n"))
 with(data,  lines(col ="red",y =  data$Sub_metering_2, 1:nrow(data) ))

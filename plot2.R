@@ -12,7 +12,7 @@ days_portuguese = c("qui","sex","sáb")
 data = data[data$DateWeekday %in% days_portuguese,]
 
 
-png("fig2.png", width = 480, height = 480)
+png("fig2.png", width = 480, height = 480, bg="transparent")
 
 with(data, plot(y =  Global_active_power, 1:nrow(data),type="l",ylab = "Global Active Power (kilowatts)", xlab = "", xaxt="n"))
 days_english = c("Thu","Fri","Sat")
